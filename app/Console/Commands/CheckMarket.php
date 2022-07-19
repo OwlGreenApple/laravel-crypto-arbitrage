@@ -17,14 +17,14 @@ use Kreait\Firebase\Messaging\Notification;
 
 use Mail;
 
-class CheckSendfox extends Command
+class CheckMarket extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'check:sendfox';
+    protected $signature = 'check:market';
 
     /**
      * The console command description.

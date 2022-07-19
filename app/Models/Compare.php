@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Compare extends Model
 {
     use HasFactory;
+    protected $table = 'compares';
 }

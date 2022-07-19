@@ -77,7 +77,7 @@ class CheckMarket extends Command
               'percentage'=>$percentage,
               'exchange'=>$exchange,
             );
-              Mail::send('emails.notif', $data, function($message) use ($user) {
+              Mail::send('emails.notif', $data, function($message)  {
               $message->from('info@watcherviews.com', 'Watcherviews');
               $message->to($user->email)->subject('[My Arbitrage] please check');
             });

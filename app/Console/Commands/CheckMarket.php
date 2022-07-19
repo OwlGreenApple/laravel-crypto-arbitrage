@@ -47,7 +47,9 @@ class CheckMarket extends Command
     public function handle()
     {
         $compares = Compare::all();
+        $counter = 0;
         foreach($compares as $compare){
+          $counter += 1;
           echo $compare->symbol_kucoin." ".$compare->symbol_binance.";";
           $price_kucoin = $this->check_kucoin($compare->symbol_kucoin);
           $price_binance = $this->check_binance($compare->symbol_binance);
@@ -86,6 +88,7 @@ class CheckMarket extends Command
 
           }
         }
+        echo "counter:".$counter;
     }
 
     public function check_kucoin($symbol){

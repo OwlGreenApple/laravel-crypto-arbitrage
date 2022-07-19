@@ -48,6 +48,7 @@ class CheckMarket extends Command
     {
         $compares = Compare::all();
         foreach($compares as $compare){
+          echo $compare->symbol_kucoin." ".$compare->symbol_binance.";";
           $price_kucoin = $this->check_kucoin($compare->symbol_kucoin);
           $price_binance = $this->check_binance($compare->symbol_binance);
 

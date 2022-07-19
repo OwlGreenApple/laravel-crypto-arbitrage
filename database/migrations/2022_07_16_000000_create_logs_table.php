@@ -17,6 +17,7 @@ class CreateLogsTable extends Migration
             $table->id();
             $table->string('symbol')->nullable();
             $table->string('exchange')->nullable();
+            $table->double('percentage')->nullable();
             $table->timestamps();
         });
     }

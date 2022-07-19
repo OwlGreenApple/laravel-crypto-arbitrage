@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Compare;
+use App\Models\Log;
 use DB;
 use App\Helpers\JSONHelper;
 
@@ -47,11 +48,43 @@ class CheckMarket extends Command
     {
         $compares = Compare::all();
         foreach($compares as $compare){
-          $this->check_kucoin($compare->symbol_kucoin);
-          $this->check_binance($compare->symbol_binance);
+          $price_kucoin = $this->check_kucoin($compare->symbol_kucoin);
+          $price_binance = $this->check_binance($compare->symbol_binance);
+
+          $exchange= "";
+          if ($price_kucoin>$price_binance){
+            $exchange= "kucoin";
+            $symbol = $compare->symbol_kucoin;
+          }else {
+            $exchange= "binance";
+            $symbol = $compare->symbol_binance;
+          }
+          $max = max($price_kucoin, $price_binance);
+          $percentage = abs($price_kucoin - $price_binance) / $max * 100;
+          echo $percentage;
+          if ($percentage >= 2 ) {
+            echo "greater than 2";
+            //save to database
+            $log = New Log;
+            $log->symbol = $symbol;
+            $log->exchange = $exchange;
+            $log->percentage = $percentage;
+            $log->save();
+
+            //email
+            $data = array(
+              'market'=>$symbol,
+              'percentage'=>$percentage,
+              'exchange'=>$exchange,
+            );
+              Mail::send('emails.notif', $data, function($message) use ($user) {
+              $message->from('info@watcherviews.com', 'Watcherviews');
+              $message->to($user->email)->subject('[My Arbitrage] please check');
+            });
+
+
+          }
         }
-        
-        //email
     }
 
     public function check_kucoin($symbol){
@@ -94,6 +127,28 @@ class CheckMarket extends Command
     }
 
     public function check_binance($symbol){
+      $curl = curl_init();
+      $url = 'https://api1.binance.com/api/v3/ticker/price?symbol=BNBBTC';
+      // $url = 'https://api1.binance.com/api/v3/ping';
+      $proxy = '127.0.0.1:8888';
+
+      $ch = curl_init($url);
+      curl_setopt($ch, CURLOPT_PROXY, $proxy);
+      curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+      curl_setopt($ch, CURLOPT_VERBOSE, 0);
+      curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 0);
+      curl_setopt($ch, CURLOPT_TIMEOUT, 360);
+      curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+      curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
+     
+      $response = curl_exec($ch);
+      $err = curl_error($ch);
+      curl_close($ch);
+      $output = json_decode($response,true);
+      print_r($output);
+      echo $response;
+
     }
 /* end class */
 }

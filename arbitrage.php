@@ -21,12 +21,12 @@
       print_r($output);
       */
       $curl = curl_init();
-      // $url = 'https://api1.binance.com/api/v3/ticker/price';
-      $url = 'https://api1.binance.com/api/v3/ping';
-      $proxy = '127.0.0.1:8888';
+      $url = 'https://api1.binance.com/api/v3/ticker/price?symbol=BNBBTC';
+      // $url = 'https://api1.binance.com/api/v3/ping';
+      // $proxy = '127.0.0.1:8888';
 
       $ch = curl_init($url);
-      curl_setopt($ch, CURLOPT_PROXY, $proxy);
+      // curl_setopt($ch, CURLOPT_PROXY, $proxy);
       curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
       curl_setopt($ch, CURLOPT_VERBOSE, 0);
       curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 0);
@@ -41,5 +41,13 @@
       $output = json_decode($response,true);
       print_r($output);
       echo $response;
-      
+           
+      /*$price_kucoin = 0.01;
+      $price_binance = 0.0103;
+      $max = max($price_kucoin, $price_binance);
+      $percentage = abs($price_kucoin - $price_binance) / $max * 100;
+      echo $percentage;
+      if ($percentage >= 2 ) {
+        echo "greater than 2";
+      }*/
 ?>

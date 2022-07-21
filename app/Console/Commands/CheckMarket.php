@@ -65,7 +65,7 @@ class CheckMarket extends Command
           $max = max($price_kucoin, $price_binance);
           $percentage = abs($price_kucoin - $price_binance) / $max * 100;
           echo $percentage;
-          if ($percentage >= 2 ) {
+          if ($percentage >= 1.25 ) {
             echo "greater than 2";
             //save to database
             $log = New Log;
@@ -79,6 +79,8 @@ class CheckMarket extends Command
               'market'=>$symbol,
               'percentage'=>$percentage,
               'exchange'=>$exchange,
+              'price_kucoin'=>$price_kucoin,
+              'price_binance'=>$price_binance,
             );
               Mail::send('emails.notif', $data, function($message)  {
               $message->from('info@watcherviews.com', 'Watcherviews');

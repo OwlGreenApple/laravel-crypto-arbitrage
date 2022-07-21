@@ -65,7 +65,7 @@ class CheckMarket extends Command
           $max = max($price_kucoin, $price_binance);
           $percentage = abs($price_kucoin - $price_binance) / $max * 100;
           echo $percentage;
-          if ($percentage >= 1.25 ) {
+          if ( ($percentage >= 1.25 ) && ($price_binance<>0 || $price_kucoin<>0) ) {
             echo "greater than 2";
             //save to database
             $log = New Log;
@@ -117,7 +117,7 @@ class CheckMarket extends Command
 
     public function check_binance($symbol){
       $curl = curl_init();
-      $url = 'https://api1.binance.com/api/v3/ticker/price?symbol='.$symbol;
+      $url = 'https://api2.binance.com/api/v3/ticker/price?symbol='.$symbol;
       // $url = 'https://api1.binance.com/api/v3/ping';
       //$proxy = '127.0.0.1:8888';
 

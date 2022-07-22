@@ -65,7 +65,7 @@ class CheckMarket extends Command
           $max = max($price_kucoin, $price_binance);
           $percentage = abs($price_kucoin - $price_binance) / $max * 100;
           echo $percentage;
-          if ( ($percentage >= 1.25 ) && ($price_binance<>0 || $price_kucoin<>0) ) {
+          if ( ($percentage >= 1 ) && ($price_binance<>0 || $price_kucoin<>0) ) {
             echo "greater than 2";
             //save to database
             $log = New Log;

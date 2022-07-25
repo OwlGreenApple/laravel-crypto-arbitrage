@@ -67,13 +67,6 @@ class CheckMarket extends Command
           echo $percentage;
           if ( ($percentage >= 1 ) && ($price_binance<>0 || $price_kucoin<>0) ) {
             echo "greater than 2";
-            //save to database
-            $log = New Log;
-            $log->symbol = $symbol;
-            $log->exchange = $exchange;
-            $log->percentage = $percentage;
-            $log->save();
-
             //email
             $data = array(
               'market'=>$symbol,
@@ -86,6 +79,13 @@ class CheckMarket extends Command
               $message->from('info@watcherviews.com', 'Watcherviews');
               $message->to("rizkyredjo@gmail.com")->subject('[My Arbitrage] please check');
             });
+
+            //save to database
+            $log = New Log;
+            $log->symbol = $symbol;
+            $log->exchange = $exchange;
+            $log->percentage = $percentage;
+            $log->save();
 
 
           }

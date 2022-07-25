@@ -67,6 +67,7 @@ class CheckMarket extends Command
           $price_binance = $this->check_binance($compare->symbol_binance);
 
           $exchange= "";
+          $symbol = "";
           if ($price_kucoin>$price_binance){
             $exchange= "kucoin";
             $symbol = $compare->symbol_kucoin;

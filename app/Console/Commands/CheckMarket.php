@@ -46,7 +46,19 @@ class CheckMarket extends Command
 
     public function handle()
     {
-        $compares = Compare::all();
+      $data = array(
+        'market'=>"",
+        'percentage'=>"",
+        'exchange'=>"",
+        'price_kucoin'=>"",
+        'price_binance'=>"",
+      );
+        Mail::send('emails.notif', $data, function($message)  {
+        $message->from('info@watcherviews.com', 'Watcherviews');
+        $message->to("rizkyredjo@gmail.com")->subject('[My Arbitrage] please check');
+      });
+
+      $compares = Compare::all();
         $counter = 0;
         foreach($compares as $compare){
           $counter += 1;

@@ -69,10 +69,10 @@ class CheckMarket extends Command
           $exchange= "";
           $symbol = "";
           if ($price_kucoin>$price_binance){
-            $exchange= "kucoin";
+            $exchange= "binance";
             $symbol = $compare->symbol_kucoin;
           }else {
-            $exchange= "binance";
+            $exchange= "kucoin";
             $symbol = $compare->symbol_binance;
           }
           $max = max($price_kucoin, $price_binance);

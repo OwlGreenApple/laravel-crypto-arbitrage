@@ -13,6 +13,7 @@ use Mail;
 use DB,Crypt,Browser;
 use Carbon\Carbon;
 use Binance\API as bapi;
+use Lin\Binance\Binance;
 
 use Illuminate\Support\Facades\Storage;
 
@@ -20,10 +21,15 @@ class ApiController extends Controller
 {
     public function test_api(Request $request)
     {
-      $api = new bapi("CIzCTFYY34Mu4ShFl6CaJ9Y575jyOIbfvFlTucRKZqr0XgnYeNU9T9YaYAQYuzPn","xzPomFHFEWhB4u6wINtkexG0MIQKy6itO72U8uMFwm4DXdhbTUAxGD9h8lscmPRn");
+      /*$api = new bapi("CIzCTFYY34Mu4ShFl6CaJ9Y575jyOIbfvFlTucRKZqr0XgnYeNU9T9YaYAQYuzPn","xzPomFHFEWhB4u6wINtkexG0MIQKy6itO72U8uMFwm4DXdhbTUAxGD9h8lscmPRn");
       $balances = $api->balances();
       dd($balances);
-      echo "a";
+      echo "a";*/
+      $key = "CIzCTFYY34Mu4ShFl6CaJ9Y575jyOIbfvFlTucRKZqr0XgnYeNU9T9YaYAQYuzPn";
+      $secret = "xzPomFHFEWhB4u6wINtkexG0MIQKy6itO72U8uMFwm4DXdhbTUAxGD9h8lscmPRn";
+      $binance=new Binance($key,$secret);
+      $result=$binance->user()->getAccount();
+      dd($result);
     }
     
 /* end class */

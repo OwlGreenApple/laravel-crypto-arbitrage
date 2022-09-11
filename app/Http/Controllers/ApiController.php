@@ -36,11 +36,21 @@ class ApiController extends Controller
       //$binance=new Binance($key,$secret);
 
       //buat futures market 
-      //$binance=new BinanceFuture();
+      $binance=new BinanceFuture($key,$secret);
       //Or New Delivery
-      $binance=new BinanceDelivery($key,$secret);
+      //$binance=new BinanceDelivery($key,$secret);
 
       $result=$binance->user()->getAccount();
+/*
+->getAccount() -> buat cari usdt
+->getBalance() -> buat lihat apa eth e 0 ?
+assets 
+eth -> 4
+
+positions
+eth -> 47,34 array
+*/
+      //dd($result);
       dd($result);
     }
     

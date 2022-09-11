@@ -75,9 +75,34 @@ eth -> 47,34 array
        * 1. trade 
        * 2. cek klo position, buat order 15% tp, order -3% cl
        */
+      $key = "Y0VLGySHBvmI8arrWMbF7WvIoDXyojPIbabW8TVEpFoybxfpyno8pjAiYxmFS46x";
+      $secret = "U40PCdHZujt6gQlw6sa2x0aLwlT0jsWirQ9wNYHKUNR8xAhJmp2ya4u4ONP6CJmc";
 
+      //buat spot marrket
+      //$binance=new Binance($key,$secret);
+
+      //buat futures market 
+      $binance=new BinanceFuture($key,$secret);
+      //Or New Delivery
+      $result=$binance->user()->getAccount();
+      foreach($result['assets'] as $row) {
+        if ($row->asset == "USDT" && $row->walletBalance >1) {
+          //order o
+        }
+      }
+
+      // if klo ada open order jgn 
+      //quit ngga lakukan yg dibawah 
+
+      foreach($result['positions'] as $row) {
+        if ($row->symbol == "ethusdt" && $row->walletBalance >1) {
+          //if ()  entryPrice > 0 -> buat o order
+        }
+      }
     }
 /* end class */
+
+
 
 }
 

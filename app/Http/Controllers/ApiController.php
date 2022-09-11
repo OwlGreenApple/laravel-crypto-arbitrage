@@ -13,7 +13,11 @@ use Mail;
 use DB,Crypt,Browser;
 use Carbon\Carbon;
 use Binance\API as bapi;
+
+
 use Lin\Binance\Binance;
+use Lin\Binance\BinanceFuture;
+use Lin\Binance\BinanceDelivery;
 
 use Illuminate\Support\Facades\Storage;
 
@@ -27,7 +31,15 @@ class ApiController extends Controller
       echo "a";*/
       $key = "CIzCTFYY34Mu4ShFl6CaJ9Y575jyOIbfvFlTucRKZqr0XgnYeNU9T9YaYAQYuzPn";
       $secret = "xzPomFHFEWhB4u6wINtkexG0MIQKy6itO72U8uMFwm4DXdhbTUAxGD9h8lscmPRn";
-      $binance=new Binance($key,$secret);
+
+      //buat spot marrket
+      //$binance=new Binance($key,$secret);
+
+      //buat futures market 
+      //$binance=new BinanceFuture();
+      //Or New Delivery
+      $binance=new BinanceDelivery($key,$secret);
+
       $result=$binance->user()->getBalance();
       dd($result);
     }

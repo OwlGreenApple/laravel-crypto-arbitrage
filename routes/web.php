@@ -20,3 +20,4 @@ Route::get('/', function () {
 
 
 Route::get('/test', [ApiController::class, 'test_api']);
+Route::get('/callback-tradingview', [ApiController::class, 'callback_tradingview']);

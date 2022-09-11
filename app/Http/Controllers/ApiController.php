@@ -28,10 +28,33 @@ class ApiController extends Controller
       $key = "CIzCTFYY34Mu4ShFl6CaJ9Y575jyOIbfvFlTucRKZqr0XgnYeNU9T9YaYAQYuzPn";
       $secret = "xzPomFHFEWhB4u6wINtkexG0MIQKy6itO72U8uMFwm4DXdhbTUAxGD9h8lscmPRn";
       $binance=new Binance($key,$secret);
-      $result=$binance->user()->getAccount();
+      $result=$binance->user()->getBalance();
       dd($result);
     }
     
+    public function callback_tradingview(Request $request)
+    {
+      $data = array(
+        'market'=>$symbol,
+        'percentage'=>$percentage,
+        'exchange'=>$exchange,
+        'price_kucoin'=>$price_kucoin,
+        'price_binance'=>$price_binance,
+      );
+      Mail::send('emails.notif', $data, function($message)  {
+        $message->from('info@watcherviews.com', 'Watcherviews');
+        $message->to("rizkyredjo@gmail.com")->subject('[My Arbitrage] please check');
+      });
+
+      /**
+       * cari indicator yang bagus
+       * 
+       * eksekusi check balance e siap ngga(masi ditrade in ngga),
+       * 1. trade 
+       * 2. cek klo position, buat order 15% tp, order -3% cl
+       */
+
+    }
 /* end class */
 
 }

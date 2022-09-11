@@ -29,8 +29,8 @@ class ApiController extends Controller
       $balances = $api->balances();
       dd($balances);
       echo "a";*/
-      $key = "CIzCTFYY34Mu4ShFl6CaJ9Y575jyOIbfvFlTucRKZqr0XgnYeNU9T9YaYAQYuzPn";
-      $secret = "xzPomFHFEWhB4u6wINtkexG0MIQKy6itO72U8uMFwm4DXdhbTUAxGD9h8lscmPRn";
+      $key = "Y0VLGySHBvmI8arrWMbF7WvIoDXyojPIbabW8TVEpFoybxfpyno8pjAiYxmFS46x";
+      $secret = "U40PCdHZujt6gQlw6sa2x0aLwlT0jsWirQ9wNYHKUNR8xAhJmp2ya4u4ONP6CJmc";
 
       //buat spot marrket
       //$binance=new Binance($key,$secret);

@@ -40,7 +40,7 @@ class ApiController extends Controller
       //Or New Delivery
       $binance=new BinanceDelivery($key,$secret);
 
-      $result=$binance->user()->getBalance();
+      $result=$binance->user()->getAccount();
       dd($result);
     }
     

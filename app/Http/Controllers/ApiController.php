@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Database\QueryException;
 use App\User;
+use App\Models\Log;
 use Mail;
 use DB,Crypt,Browser;
 use Carbon\Carbon;
@@ -56,6 +57,13 @@ eth -> 47,34 array
     
     public function callback_tradingview(Request $request)
     {
+      $log = New Log;
+      $log->symbol = $request->text;
+      $log->exchange = "";
+      $log->percentage = 0;
+      $log->save();
+      return "success";
+
       $data = array(
         'market'=>$symbol,
         'percentage'=>$percentage,

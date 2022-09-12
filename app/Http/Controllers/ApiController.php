@@ -58,7 +58,7 @@ eth -> 47,34 array
     public function callback_tradingview(Request $request)
     {
       $log = New Log;
-      $log->symbol = (string) $request;
+      $log->symbol = $request->getContent();
       $log->exchange = "";
       $log->percentage = 0;
       $log->save();

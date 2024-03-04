@@ -46,6 +46,7 @@ class CheckMarket extends Command
 
     public function handle()
     {
+      echo "new";
       /*$data = array(
         'market'=>"",
         'percentage'=>"",

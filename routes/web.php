@@ -18,6 +18,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
+    
 Route::get('/test', [ApiController::class, 'test_api']);
 Route::post('/callback-tradingview', [ApiController::class, 'callback_tradingview']);

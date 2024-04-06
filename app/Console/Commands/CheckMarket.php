@@ -83,7 +83,7 @@ class CheckMarket extends Command
             $percentage = abs($arr_kucoin['price_bid'] - $arr_binance['price_bid']) / $max * 100;
           }
           echo $percentage;
-          if ( ($percentage >= 0.15 ) && ($price_binance<>0 || $price_kucoin<>0) ) {
+          if ( ($percentage >= 0.1 ) && ($price_binance<>0 || $price_kucoin<>0) ) {
             echo "greater than 2";
             //email
             $data = array(
